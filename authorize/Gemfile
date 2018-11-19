@@ -1,0 +1,5 @@
+source 'https://rubygems.org'
+
+gem 'dotenv', require: 'dotenv/load'
+gem 'activesupport', require: 'active_support/core_ext/object/to_query'
+gem 'httparty'
