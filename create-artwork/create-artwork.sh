@@ -4,14 +4,14 @@
 
 # 1. Find artist
 
-curl -X GET https://api.arty.net/api/v1/match/artists?term=picasso&size=5&page=1&exact=false&sort=name_exact \
+curl -X GET https://api.artsy.net/api/v1/match/artists?term=picasso&size=5&page=1&exact=false&sort=name_exact \
      -H "x-access-token: ${access_token}"
 
 # 2. First create the artwork with a POST
 
 #    a. Works by a single artists, set the `artists` array param to single artist slug
 
-curl -X POST https://api.arty.net/api/v1/artwork \
+curl -X POST https://api.artsy.net/api/v1/artwork \
      -H 'Content-Type: application/json' \
      -d "{ \"title\": \"Head\",
            \"artists\": [\"jean-michel-basquiat\"],
@@ -20,7 +20,7 @@ curl -X POST https://api.arty.net/api/v1/artwork \
 
 #    b. Works by multiple artists
 
-curl -X POST https://api.arty.net/api/v1/artwork \
+curl -X POST https://api.artsy.net/api/v1/artwork \
      -H 'Content-Type: application/json' \
      -d "{ \"title\": \"Heart attack (in 2 parts)\",
            \"artists\": [\"andy-warhol\", \"jean-michel-basquiat\"],
@@ -35,7 +35,7 @@ curl -X POST https://api.artsy.net/api/v1/artwork/"${artwork_id}"/image
 
 # 4. Update metadata
 
-curl -X PUT https://api.arty.net/api/v1/artwork/"${artwork_id}" \
+curl -X PUT https://api.artsy.net/api/v1/artwork/"${artwork_id}" \
      -H 'Content-Type: application/json' \
      -d "{\"additional_information\":\"Acquired from the collection and estate of Wolf Kahn and Emily Mason\\nA rare artists proof, #16 of 24 \\nPublished by Tyler Graphics, Ltd., Mount Kisco, New York for Axel Springer Verlag AG, Hamburg, Germany\\nCatalogue Raisonne: Axsom 250\",
           \"arta_enabled\":true,
@@ -128,28 +128,28 @@ curl -X PUT https://api.arty.net/api/v1/artwork/"${artwork_id}" \
 # Category will show up on staging.artsy.net under the Medium tag, we know it's confusing!
 # A couple examples with different category and medium values:
 
-curl -X PUT https://api.arty.net/api/v1/artwork/"${artwork_id}" \
+curl -X PUT https://api.artsy.net/api/v1/artwork/"${artwork_id}" \
      -H 'Content-Type: application/json' \
      -d "{ \"published\": true,
            \"date\" : \"1984\",
            \"category\": \"Painting\",
            \"medium\": \"Acrylic on canvas\" }"
 
-curl -X PUT https://api.arty.net/api/v1/artwork/"${artwork_id}" \
+curl -X PUT https://api.artsy.net/api/v1/artwork/"${artwork_id}" \
      -H 'Content-Type: application/json' \
      -d "{ \"published\": true,
            \"date\" : \"2019\",
            \"category\": \"Photography\",
            \"medium\": \"C - type Fuji crystal archival print, Dibond mounted.\" }"
 
-curl -X PUT https://api.arty.net/api/v1/artwork/"${artwork_id}" \
+curl -X PUT https://api.artsy.net/api/v1/artwork/"${artwork_id}" \
      -H 'Content-Type: application/json' \
      -d "{ \"published\": true,
            \"date\" : \"2019\",
            \"category\": \"Sculpture\",
            \"medium\": \"Molded Foam & Acrylic, Paint\" }"
 
-curl -X PUT https://api.arty.net/api/v1/artwork/"${artwork_id}" \
+curl -X PUT https://api.artsy.net/api/v1/artwork/"${artwork_id}" \
      -H 'Content-Type: application/json' \
      -d "{ \"published\": true,
            \"date\" : \"2019\",
