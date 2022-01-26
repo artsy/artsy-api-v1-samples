@@ -9,6 +9,9 @@ curl -X GET https://api.artsy.net/api/v1/match/artists?term=picasso&size=5&page=
 
 # 2. First create the artwork with a POST
 
+#    NOTE: You won't be able to set the "published" field to true when first creating.
+#          A follow up PUT request can be used to publish the artwork.
+
 #    a. Works by a single artists, set the `artists` array param to single artist slug
 
 curl -X POST https://api.artsy.net/api/v1/artwork \
@@ -16,7 +19,7 @@ curl -X POST https://api.artsy.net/api/v1/artwork \
      -d "{ \"title\": \"Head\",
            \"artists\": [\"jean-michel-basquiat\"],
            \"access_token\": \"${access_token}\",
-           \"partner_id\": \"${parter_id}\" }"
+           \"partner\": \"${parter_id}\" }"
 
 #    b. Works by multiple artists
 
@@ -25,7 +28,7 @@ curl -X POST https://api.artsy.net/api/v1/artwork \
      -d "{ \"title\": \"Heart attack (in 2 parts)\",
            \"artists\": [\"andy-warhol\", \"jean-michel-basquiat\"],
            \"access_token\": \"${access_token}\",
-           \"partner_id\": \"${parter_id}\" }"
+           \"partner\": \"${parter_id}\" }"
 
 # 3. Add images
 
@@ -39,7 +42,10 @@ curl -X PUT https://api.artsy.net/api/v1/artwork/"${artwork_id}" \
      -H 'Content-Type: application/json' \
      -d "{\"additional_information\":\"Acquired from the collection and estate of Wolf Kahn and Emily Mason\\nA rare artists proof, #16 of 24 \\nPublished by Tyler Graphics, Ltd., Mount Kisco, New York for Axel Springer Verlag AG, Hamburg, Germany\\nCatalogue Raisonne: Axsom 250\",
           \"arta_enabled\":true,
+          \"artists\":[\"frank-stella\"],
           \"attribution_class\":\"limited edition\",
+          \"availability\":\"for sale\",
+          \"availability_hidden\":\"false\",
           \"blurb\":\"\",
           \"can_share_image\":true,
           \"category\":\"Print\",
@@ -49,7 +55,12 @@ curl -X PUT https://api.artsy.net/api/v1/artwork/"${artwork_id}" \
           \"collecting_institution\":\"\",
           \"condition_description\":\"very good condition\",
           \"confidential_notes\":\"\",
+          \"date\":\"2009\",
           \"depth\":\"\",
+          \"diameter\":null,
+          \"display_price_range\":\"false\",
+          \"domestic_shipping_fee_cents\":10000,
+          \"duration\":null,
           \"ecommerce\":true,
           \"exhibition_history\":\"\",
           \"external_id\":null,
@@ -63,19 +74,28 @@ curl -X PUT https://api.artsy.net/api/v1/artwork/"${artwork_id}" \
           \"height\":\"17.3\",
           \"image_rights\":\"\",
           \"import_source\":null,
+          \"international_shipping_fee_cents\":25000,
           \"inventory_id\":\"\",
           \"literature\":\"Catalogue Raisonne: Axsom 250\",
+          \"location\":\"\",
+          \"manufacturer\":null,
           \"medium\":\"Lithograph and silkscreen on white Lana mould-made paper\",
+          \"metric\":\"in\",
           \"not_signed\":false,
           \"offer\":false,
+          \"partner\":\"${partner_id}\",
           \"partner_location_id\":\"5748d22f139b21265b000352\",
           \"pickup_available\":true,
           \"price_currency\":\"USD\",
+          \"price_hidden\":\"false\",
           \"price_includes_tax\":false,
           \"price_listed\":15000.0,
           \"price_max\":15000.0,
           \"price_min\":15000.0,
           \"provenance\":\"Acquired from the private collection and estate of Wolf Kahn and Emily Mason\",
+          \"published\":false,
+          \"publisher\":\" Tyler Graphics, Ltd., Mount Kisco, New York for Axel Springer Verlag AG, Hamburg, Germany.\",
+          \"secondary_market\":true,
           \"series\":\"\",
           \"shipping_weight\":\"\",
           \"shipping_weight_metric\":\"lb\",
@@ -86,19 +106,8 @@ curl -X PUT https://api.artsy.net/api/v1/artwork/"${artwork_id}" \
           \"stamped_by_artist_estate\":false,
           \"sticker_label\":false,
           \"title\":\"Prince of Hohenfliess (Axsom 250)\",
-          \"width\":\"12.5\",
-          \"artists\":[\"frank-stella\"],
-          \"price_hidden\":\"false\",
-          \"display_price_range\":\"false\",
-          \"availability_hidden\":\"false\",
-          \"availability\":\"for sale\",
-          \"diameter\":null,
-          \"duration\":null,
-          \"metric\":\"in\",
-          \"manufacturer\":null,
-          \"publisher\":\" Tyler Graphics, Ltd., Mount Kisco, New York for Axel Springer Verlag AG, Hamburg, Germany.\",
-          \"domestic_shipping_fee_cents\":\"\",
-          \"international_shipping_fee_cents\":\"\"}"
+          \"unique\":true,
+          \"width\":\"12.5\"}"
 
 # 5. Publish artwork (Can be combined with above request)
 
@@ -130,31 +139,29 @@ curl -X PUT https://api.artsy.net/api/v1/artwork/"${artwork_id}" \
 
 curl -X PUT https://api.artsy.net/api/v1/artwork/"${artwork_id}" \
      -H 'Content-Type: application/json' \
-     -d "{ \"published\": true,
-           \"date\" : \"1984\",
-           \"category\": \"Painting\",
+     -d "{ \"category\": \"Painting\",
            \"medium\": \"Acrylic on canvas\" }"
 
 curl -X PUT https://api.artsy.net/api/v1/artwork/"${artwork_id}" \
      -H 'Content-Type: application/json' \
-     -d "{ \"published\": true,
-           \"date\" : \"2019\",
-           \"category\": \"Photography\",
+     -d "{ \"category\": \"Photography\",
            \"medium\": \"C - type Fuji crystal archival print, Dibond mounted.\" }"
 
 curl -X PUT https://api.artsy.net/api/v1/artwork/"${artwork_id}" \
      -H 'Content-Type: application/json' \
-     -d "{ \"published\": true,
-           \"date\" : \"2019\",
-           \"category\": \"Sculpture\",
+     -d "{ \"category\": \"Sculpture\",
            \"medium\": \"Molded Foam & Acrylic, Paint\" }"
 
 curl -X PUT https://api.artsy.net/api/v1/artwork/"${artwork_id}" \
      -H 'Content-Type: application/json' \
-     -d "{ \"published\": true,
-           \"date\" : \"2019\",
-           \"category\": \"Mixed Media\",
+     -d "{ \"category\": \"Mixed Media\",
            \"medium\": \"Plastic and wire on canvas\" }"
+
+# To publish:
+
+curl -X PUT https://api.artsy.net/api/v1/artwork/"${artwork_id}" \
+     -H 'Content-Type: application/json' \
+     -d "{ \"published\": true }"
 
 # 6. Check for published work from the JSON response, the slug is the id
 
