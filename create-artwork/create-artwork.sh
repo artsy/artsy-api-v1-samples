@@ -32,9 +32,23 @@ curl -X POST https://api.artsy.net/api/v1/artwork \
 
 # 3. Add images
 
+#    a. Add via URL
+
 curl -X POST https://api.artsy.net/api/v1/artwork/"${artwork_id}"/image
      -H 'Content-Type: application/json' \
      -d "{ \"remote_image_url\": \"https://upload.wikimedia.org/wikipedia/commons/6/6a/Mona_Lisa.jpg\"}"
+
+#    b. Use Gemup to handle file upload
+
+        See https://github.com/artsy/gemini/blob/7c327d67f92bd17121cde7f5b4fee2c5bb129b81/docs/uploading-to-gemini-with-gemup.md
+             a. Reach out to your Artsy Engineering point of contact and have them create an Account in Gemini
+             b. After they do that, they will give you a key in form of a string, most likely a name of your app
+        See:
+             https://github.com/artsy/gemini/blob/7c327d67f92bd17121cde7f5b4fee2c5bb129b81/docs/uploading-to-gemini-with-gemup.md
+
+             https://github.com/artsy/gemup
+
+        Also see https://github.com/artsy/gemup/blob/master/gemup.js for example in javascript
 
 # 4. Update metadata
 
