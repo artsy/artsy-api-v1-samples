@@ -40,13 +40,10 @@ curl -X POST https://api.artsy.net/api/v1/artwork/"${artwork_id}"/image
 
 #    b. Use Gemup to handle file upload
 
-        See https://github.com/artsy/gemini/blob/7c327d67f92bd17121cde7f5b4fee2c5bb129b81/docs/uploading-to-gemini-with-gemup.md
-             a. Reach out to your Artsy Engineering point of contact and have them create an Account in Gemini
-             b. After they do that, they will give you a key in form of a string, most likely a name of your app
-        See:
-             https://github.com/artsy/gemini/blob/7c327d67f92bd17121cde7f5b4fee2c5bb129b81/docs/uploading-to-gemini-with-gemup.md
+          1. Reach out to your Artsy Engineering point of contact and have them create an Account in Gemini
+          2. After they do that, they will give you a key in form of a string, most likely a name of your app
 
-             https://github.com/artsy/gemup
+        See https://github.com/artsy/gemup for source code and documentation
 
         Also see https://github.com/artsy/gemup/blob/master/gemup.js for example in javascript
 
